@@ -24,16 +24,23 @@ File được mã hoá **AES-256-GCM**, key suy ra bằng **PBKDF2-SHA256 250.00
 ## Cách chạy
 
 ```
-cr7.bat                       -> hôm nay, cả ngày
-cr7.bat 18/10                 -> ngày 18/10, cả ngày
-cr7.bat 18/10 0800-1700       -> chỉ 08:00 - 17:00
-cr7.bat hom qua 8-17          -> hôm qua, 08:00 - 17:00
-cr7.bat 18/10 full            -> quét cả C:\Windows (cham hon nhieu lan)
+cr7.bat                                -> hôm nay, cả ngày
+cr7.bat 18/10                          -> ngày 18/10, cả ngày
+cr7.bat 18/10 0800-1700                -> chỉ 08:00 - 17:00
+cr7.bat 18/10 0800-1700 D:\xuly        -> ngày · giờ · chỗ lưu
+cr7.bat 18/10 ~\Desktop                -> không cần khung giờ vẫn chọn được chỗ lưu
+cr7.bat 18/10 "D:\De Xuat"             -> đường dẫn có dấu cách thì bọc nháy kép
+cr7.bat hom qua 8-17                   -> hôm qua, 08:00 - 17:00
+cr7.bat 18/10 full                     -> quét cả C:\Windows (cham hon nhieu lan)
 ```
 
-Nháy đúp không tham số thì nó **hỏi 2 câu**: ngày khảo sát, rồi khung giờ (Enter trắng = quét cả ngày). Khung giờ chấp nhận `0800-1700`, `08:00-17:00`, `8-17`, `8h-17h`, `8 gio - 17 gio`. Gõ `22-06` được hiểu là 22:00 hôm trước đến 06:00 hôm sau.
+Chạy trong PowerShell thì nhớ `.\` đầu câu (`.\cr7.bat 18/10`), hoặc dán đường dẫn đầy đủ `& "$HOME\Downloads\cr7.bat" 18/10`. Gõ trần `cr7.bat` trong PowerShell sẽ báo *not recognized*; `cmd` thì gõ trần được.
 
-Kết quả lưu ở gốc ổ chứa file `.bat`, ví dụ `C:\BangChung_18_10_2026_0800h-1700h_<TEN_MAY>\`.
+Nháy đúp không tham số thì nó **hỏi 3 câu**: ngày khảo sát, khung giờ, chỗ lưu. Enter trắng = hôm nay / cả ngày / gốc ổ chứa file. Ở câu chỗ lưu, gõ `chon` để mở hộp thoại chọn thư mục của Windows. Khung giờ chấp nhận `0800-1700`, `08:00-17:00`, `8-17`, `8h-17h`, `8 gio - 17 gio`. Gõ `22-06` được hiểu là 22:00 hôm trước đến 06:00 hôm sau.
+
+Chỗ lưu chấp nhận đường dẫn tuyệt đối (`D:\xuly`, `C:\Users\PC\Desktop`), `~\Desktop`, `%USERPROFILE%\Desktop`, hoặc tên tương đối (tính theo thư mục chứa `cr7.bat`). Thư mục chưa có sẽ được tạo; chỗ ghi không được thì tự quay về mặc định và in cảnh báo.
+
+Kết quả lưu trong `BangChung_<ngày>_<tên máy>`, ví dụ `C:\BangChung_18_10_2026_0800h-1700h_<TEN_MAY>\` hoặc `D:\xuly\BangChung_...`.
 
 ## Ghi chú thật thà
 
